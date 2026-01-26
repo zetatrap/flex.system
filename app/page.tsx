@@ -10,11 +10,11 @@ import Footer from '@/components/Footer'
 export default function Home() {
   // Imágenes para el carrusel hero (el usuario las reemplazará con sus propias imágenes PNG)
   const heroImages = [
-    '/images/hero/slide1.png',
-    '/images/hero/slide2.png',
-    '/images/hero/slide3.png',
-    '/images/hero/slide4.png',
-    '/images/hero/slide5.png',
+    '/images/hero/f1 venta.png',
+    '/images/hero/venta 2.png',
+    '/images/hero/VENTA 3.png',
+    '/images/hero/venta ganadora.png',
+    '/images/hero/f1 venta.png',
   ]
 
   // Datos de las 4 aplicaciones
