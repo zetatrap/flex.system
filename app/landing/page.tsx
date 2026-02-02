@@ -6,11 +6,27 @@ import ParticlesBackground from '@/components/ParticlesBackground'
 import { Clock } from 'lucide-react'
 
 export default function LandingPage() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const images = [
+    '/images/apps/landing/1.png',
+    '/images/apps/landing/2.png',
+    '/images/apps/landing/3.png',
+  ]
+
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
     minutes: 59,
     seconds: 59
   })
+
+  // Carousel auto-rotation effect (1.5 seconds)
+  useEffect(() => {
+    const carouselTimer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length)
+    }, 1500)
+
+    return () => clearInterval(carouselTimer)
+  }, [images.length])
 
   // Countdown timer effect
   useEffect(() => {
@@ -31,8 +47,8 @@ export default function LandingPage() {
   }, [])
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = '5491234567890' // Reemplaza con tu número de WhatsApp
-    const message = encodeURIComponent('¡Hola! Estoy interesado en comprar Flex Gym por $500.000')
+    const phoneNumber = '5493875641045'
+    const message = encodeURIComponent('Buenos días/tardes. Me comunico para solicitar información sobre la adquisición de FLEX GYM - Sistema Profesional de Gestión Deportiva. Me interesa conocer los detalles de la compra, forma de pago y el proceso de implementación. Quedo a la espera de su respuesta. Muchas gracias.')
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
   }
 
@@ -56,16 +72,15 @@ export default function LandingPage() {
               transition={{ duration: 0.8 }}
               className="relative flex items-center justify-center order-1 lg:order-1"
             >
-              <div className="relative w-full max-w-[200px] md:max-w-sm lg:max-w-lg mx-auto">
+              <div className="relative w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto">
                 {/* Glow effect behind image */}
                 <div className="absolute inset-0 bg-gradient-gold blur-2xl md:blur-3xl opacity-20 animate-pulse-slow" />
                 
-                {/* Main Image Container */}
+                {/* Main Image Container - Carousel */}
                 <div className="relative w-full flex items-center justify-center">
                   <motion.div
                     animate={{ 
                       y: [0, -10, 0],
-                      rotateY: [0, 5, 0, -5, 0]
                     }}
                     transition={{ 
                       duration: 6, 
@@ -74,13 +89,38 @@ export default function LandingPage() {
                     }}
                     className="relative w-full"
                   >
-                    {/* App image */}
-                    <div className="relative aspect-[9/16] bg-gradient-to-br from-flex-gold/20 via-flex-dark to-flex-black rounded-2xl md:rounded-3xl shadow-gold-lg border border-flex-gold/30 md:border-2 overflow-hidden">
-                      <img 
-                        src="/images/apps/landing/flexgym-screenshot.png" 
-                        alt="Flex Gym App Screenshot"
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
+                    {/* Carousel container */}
+                    <div className="relative aspect-[16/10] bg-gradient-to-br from-flex-gold/20 via-flex-dark to-flex-black rounded-2xl md:rounded-3xl shadow-gold-lg border border-flex-gold/30 md:border-2 overflow-hidden">
+                      {images.map((image, index) => (
+                        <motion.img
+                          key={index}
+                          src={image}
+                          alt={`Flex Gym App Screenshot ${index + 1}`}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          initial={{ opacity: 0 }}
+                          animate={{ 
+                            opacity: currentImageIndex === index ? 1 : 0,
+                            scale: currentImageIndex === index ? 1 : 1.1
+                          }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      ))}
+                      
+                      {/* Carousel indicators */}
+                      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+                        {images.map((_, index) => (
+                          <motion.div
+                            key={index}
+                            className={`w-2 h-2 rounded-full ${
+                              currentImageIndex === index ? 'bg-flex-gold' : 'bg-flex-silver/50'
+                            }`}
+                            animate={{
+                              scale: currentImageIndex === index ? 1.2 : 1,
+                            }}
+                            transition={{ duration: 0.3 }}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 </div>
@@ -123,19 +163,22 @@ export default function LandingPage() {
                 className="space-y-1 md:space-y-2 lg:space-y-3"
               >
                 <p className="text-xs md:text-base lg:text-lg text-flex-silver leading-tight md:leading-relaxed">
-                  <span className="font-bold text-flex-gold">✓</span> Control total de membresías y pagos
+                  <span className="font-bold text-flex-gold">✓</span> Control total de membresías
                 </p>
                 <p className="text-xs md:text-base lg:text-lg text-flex-silver leading-tight md:leading-relaxed">
-                  <span className="font-bold text-flex-gold">✓</span> Check-in automático con tecnología QR
+                  <span className="font-bold text-flex-gold">✓</span> Check-in automático con ingreso de DNI
                 </p>
                 <p className="text-xs md:text-base lg:text-lg text-flex-silver leading-tight md:leading-relaxed">
                   <span className="font-bold text-flex-gold">✓</span> Dashboard con métricas en tiempo real
                 </p>
                 <p className="text-xs md:text-base lg:text-lg text-flex-silver leading-tight md:leading-relaxed">
-                  <span className="font-bold text-flex-gold">✓</span> Gestión de clases y profesionales
+                  <span className="font-bold text-flex-gold">✓</span> Gestión de Clases y profesionales
                 </p>
                 <p className="text-xs md:text-base lg:text-lg text-flex-silver leading-tight md:leading-relaxed">
-                  <span className="font-bold text-flex-gold">✓</span> Reportes financieros completos
+                  <span className="font-bold text-flex-gold">✓</span> Mensajes de Vencimiento de cuota al Whatsapp
+                </p>
+                <p className="text-xs md:text-base lg:text-lg text-flex-silver leading-tight md:leading-relaxed">
+                  <span className="font-bold text-flex-gold">✓</span> Generación de comprobantes automáticos
                 </p>
               </motion.div>
 
