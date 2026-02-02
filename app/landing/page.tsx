@@ -74,18 +74,13 @@ export default function LandingPage() {
                     }}
                     className="relative w-full"
                   >
-                    {/* Placeholder for app image */}
+                    {/* App image */}
                     <div className="relative aspect-[9/16] bg-gradient-to-br from-flex-gold/20 via-flex-dark to-flex-black rounded-2xl md:rounded-3xl shadow-gold-lg border border-flex-gold/30 md:border-2 overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center p-4 md:p-8">
-                          <div className="text-3xl md:text-6xl mb-2 md:mb-4">🏋️</div>
-                          <div className="text-sm md:text-2xl font-bold text-gradient-gold mb-1 md:mb-2">FLEX GYM</div>
-                          <div className="text-xs md:text-sm text-flex-silver">Coloca tu screenshot aquí</div>
-                          <div className="text-[10px] md:text-xs text-flex-silver-dark mt-1 md:mt-2">
-                            /public/images/landing/flexgym-screenshot.png
-                          </div>
-                        </div>
-                      </div>
+                      <img 
+                        src="/images/apps/landing/flexgym-screenshot.png" 
+                        alt="Flex Gym App Screenshot"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
                     </div>
                   </motion.div>
                 </div>
