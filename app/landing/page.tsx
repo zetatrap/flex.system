@@ -152,7 +152,7 @@ export default function LandingPage() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="text-[10px] md:text-sm lg:text-base text-flex-gold-light font-medium"
                 >
-                  Sistema Profesional de Gestión Deportiva
+                  ✔ Sin mensualidad, PAGO ÚNICO
                 </motion.p>
               </div>
 
