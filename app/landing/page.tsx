@@ -3,9 +3,10 @@
 import { motion, useAnimation } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground'
-import { Clock } from 'lucide-react'
+import { Clock, ChevronDown } from 'lucide-react'
 
 export default function LandingPage() {
+  const [isRequisitosOpen, setIsRequisitosOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const images = [
     '/images/apps/landing/1.png',
@@ -180,6 +181,52 @@ export default function LandingPage() {
                 <p className="text-xs md:text-base lg:text-lg text-flex-silver leading-tight md:leading-relaxed">
                   <span className="font-bold text-flex-gold">✓</span> Generación de comprobantes automáticos
                 </p>
+              </motion.div>
+
+              {/* Requisitos Desplegable */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.55 }}
+                className="relative"
+              >
+                <button
+                  onClick={() => setIsRequisitosOpen(!isRequisitosOpen)}
+                  className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors duration-300 text-xs md:text-sm lg:text-base font-semibold group"
+                >
+                  <span>📋 Requisitos del sistema</span>
+                  <motion.div
+                    animate={{ rotate: isRequisitosOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="w-4 h-4 md:w-5 md:h-5 group-hover:text-green-400" />
+                  </motion.div>
+                </button>
+
+                <motion.div
+                  initial={false}
+                  animate={{
+                    height: isRequisitosOpen ? 'auto' : 0,
+                    opacity: isRequisitosOpen ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-2 md:mt-3 pl-4 md:pl-6 space-y-1 md:space-y-2">
+                    <p className="text-xs md:text-sm lg:text-base text-flex-silver leading-tight md:leading-relaxed">
+                      <span className="text-green-500">✔</span> Computadora con Windows
+                    </p>
+                    <p className="text-xs md:text-sm lg:text-base text-flex-silver leading-tight md:leading-relaxed">
+                      <span className="text-green-500">✔</span> Teclado numérico USB estándar
+                    </p>
+                    <p className="text-xs md:text-sm lg:text-base text-flex-silver leading-tight md:leading-relaxed">
+                      <span className="text-green-500">✔</span> Dos monitores (opcional, recomendado)
+                    </p>
+                    <p className="text-xs md:text-sm lg:text-base text-flex-silver leading-tight md:leading-relaxed">
+                      <span className="text-green-500">✔</span> Ganas de crecer 🚀
+                    </p>
+                  </div>
+                </motion.div>
               </motion.div>
 
               {/* Price Section */}
